@@ -60,6 +60,19 @@ shinyServer(function(input, output, session) {
   })
   
   
+  observeEvent(input$file, {
+    
+    in_file <- input$file
+    
+    if(is.null(in_file$datapath)){} 
+    else {
+      react_graph$g <- loadGraph(in_file$datapath)
+      react_graph$g_reduced <- react_graph$g
+      }
+    
+  }, ignoreInit = FALSE) 
+  
+  
   output$originalGraphPlot <- renderPlot({
     
     plot(react_graph$g, edge.width = 2, edge.color = "Firebrick1",
