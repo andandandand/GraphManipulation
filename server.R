@@ -43,8 +43,8 @@ shinyServer(function(input, output, session) {
     
         updateSliderInput(session,
                           "numberOfElementsToDelete",
-                          max = vcount(react_graph$g_reduced),
-                          value =  vcount(react_graph$g_reduced))
+                          max = vcount(react_graph$g),
+                          value =  1)
       
     }
     
@@ -52,12 +52,31 @@ shinyServer(function(input, output, session) {
       
       updateSliderInput(session,
                         "numberOfElementsToDelete",
-                        max = ecount(react_graph$g_reduced),
-                        value = ecount(react_graph$g_reduced))
+                        max = ecount(react_graph$g),
+                        value = 1)
       
     }
     
   })
+  
+  ### delete elements
+  observeEvent(input$numberOfElementsToDelete, {
+    
+    if(input$elementsToDelete == "vertices"){
+     
+      print("delete vertices")
+      
+    }
+    
+    if(input$elementsToDelete == "edges"){
+      
+     print("delete edges")
+      
+    }
+    
+    
+  })
+  
   
   
   observeEvent(input$file, {
@@ -88,7 +107,8 @@ shinyServer(function(input, output, session) {
     coords <- layout_(react_graph$g_reduced, as_star())
     
     
-    plot(react_graph$g_reduced, layout=coords, edge.width = 2, edge.color = "Firebrick1",
+    plot(react_graph$g_reduced, layout=coords, edge.width = 2,
+         edge.color = "Firebrick1",
          vertex.color = "Lightblue2", vertex.size = 25, 
          vertex.label.family = "Arial Black" )
     
