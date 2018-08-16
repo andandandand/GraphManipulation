@@ -75,7 +75,9 @@ shinyServer(function(input, output, session) {
   
   output$originalGraphPlot <- renderPlot({
     
-    plot(react_graph$g, edge.width = 2, edge.color = "Firebrick1",
+    coords <- layout_(react_graph$g, as_star())
+    
+    plot(react_graph$g, layout=coords, edge.width = 2, edge.color = "Firebrick1",
          vertex.color = "Lightblue2", vertex.size = 25, 
          vertex.label.family = "Arial Black" )
       
@@ -83,7 +85,10 @@ shinyServer(function(input, output, session) {
   
   output$reducedGraphPlot <- renderPlot({
     
-    plot(react_graph$g, edge.width = 2, edge.color = "Firebrick1",
+    coords <- layout_(react_graph$g_reduced, as_star())
+    
+    
+    plot(react_graph$g_reduced, layout=coords, edge.width = 2, edge.color = "Firebrick1",
          vertex.color = "Lightblue2", vertex.size = 25, 
          vertex.label.family = "Arial Black" )
     
