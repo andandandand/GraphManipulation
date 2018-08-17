@@ -64,15 +64,17 @@ shinyServer(function(input, output, session) {
     
     if(input$elementsToDelete == "vertices"){
      
-      #print("delete vertices")
-      react_graph$g_reduced <- delete_vertices(react_graph$g, 1)
+    
+    #  print(1:input$numberOfElementsToDelete)
+    #  delete_vertices(react_graph$g, 1:input$numberOfElementsToDelete)
+      
     }
     
     if(input$elementsToDelete == "edges"){
       
     #print("delete edges")
 
-     react_graph$g_reduced <- delete_edges(react_graph$g, as_edgelist(g)[1:input$numberOfElementsToDelete, ])      
+     react_graph$g_reduced <- delete_edges(react_graph$g, as_edgelist(g)[1:(input$numberOfElementsToDelete-1), ])      
 
     }
     

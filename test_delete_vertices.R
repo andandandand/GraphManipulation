@@ -1,7 +1,12 @@
 library("igraph")
 
-star6 <- make_star(6, mode="undirected")
+g <- make_star(10, mode="undirected")
 
-delstar6 <- delete_vertices(star6, c("2", "3"))
+plot(g)
 
-plot(delstar6)
+reduced_g <- delete_vertices(g, lapply(1:8, toString))
+
+reduced_g <- delete_vertices(g, 1:8)
+
+
+plot(reduced_g)
