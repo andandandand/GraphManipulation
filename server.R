@@ -52,7 +52,7 @@ shinyServer(function(input, output, session) {
       
       updateSliderInput(session,
                         "numberOfElementsToDelete",
-                        max = (ecount(react_graph$g) -1) ,
+                        max = (ecount(react_graph$g)) ,
                         value = 1)
       
     }
@@ -81,6 +81,12 @@ shinyServer(function(input, output, session) {
     
   })
   
+  
+  observeEvent(input$updateGraphButton, {
+    
+    react_graph$g <- react_graph$g_reduced
+    
+  })
   
   
   observeEvent(input$file, {

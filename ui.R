@@ -26,7 +26,10 @@ shinyUI(fluidPage(
                    "Number of elements to delete",
                    min = 1,
                    max = 50,
-                   value = 30)
+                   value = 30),
+      
+      actionButton(inputId="updateGraphButton", 
+                   label="Update original graph")
        
        
     ),
