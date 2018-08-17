@@ -97,6 +97,25 @@ shinyServer(function(input, output, session) {
     else {
       react_graph$g <- loadGraph(in_file$datapath)
       react_graph$g_reduced <- react_graph$g
+    }
+    
+      
+      if(input$elementsToDelete == "vertices"){
+        
+        updateSliderInput(session,
+                          "numberOfElementsToDelete",
+                          max = (vcount(react_graph$g) -1),
+                          value =  1)
+        
+      }
+      
+      if(input$elementsToDelete == "edges"){
+        
+        updateSliderInput(session,
+                          "numberOfElementsToDelete",
+                          max = (ecount(react_graph$g)) ,
+                          value = 1)
+        
       }
     
   }, ignoreInit = FALSE) 
