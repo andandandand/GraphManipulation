@@ -43,7 +43,7 @@ shinyServer(function(input, output, session) {
     
         updateSliderInput(session,
                           "numberOfElementsToDelete",
-                          max = vcount(react_graph$g),
+                          max = (vcount(react_graph$g) -1),
                           value =  1)
       
     }
@@ -52,7 +52,7 @@ shinyServer(function(input, output, session) {
       
       updateSliderInput(session,
                         "numberOfElementsToDelete",
-                        max = ecount(react_graph$g),
+                        max = (ecount(react_graph$g) -1) ,
                         value = 1)
       
     }
@@ -64,14 +64,16 @@ shinyServer(function(input, output, session) {
     
     if(input$elementsToDelete == "vertices"){
      
-      print("delete vertices")
-      
+      #print("delete vertices")
+      #react_graph$g_reduced <- delete_vertices(react_graph$g, 1:input$numberOfElementsToDelete)
     }
     
     if(input$elementsToDelete == "edges"){
       
-     print("delete edges")
-      
+    #print("delete edges")
+
+     react_graph$g_reduced <- delete_edges(react_graph$g, as_edgelist(g)[1:input$numberOfElementsToDelete, ])      
+
     }
     
     
