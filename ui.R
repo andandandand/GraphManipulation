@@ -23,7 +23,7 @@ shinyUI(fluidPage(
 
        #TODO: update max value dynamically 
        sliderInput("numberOfElementsToDelete",
-                   "Number of elements:",
+                   "Number of elements to delete",
                    min = 1,
                    max = 50,
                    value = 30)
