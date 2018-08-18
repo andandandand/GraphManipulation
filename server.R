@@ -34,7 +34,9 @@ shinyServer(function(input, output, session) {
   
   g_reduced <- g
   
-  react_graph <- reactiveValues(g = g, g_reduced = g_reduced)
+  g_original <- g
+  
+  react_graph <- reactiveValues(g = g, g_reduced = g_reduced, g_original = g_original)
   
   ##### Update number of elements to delete
   observeEvent(input$elementsToDelete, {
@@ -88,6 +90,14 @@ shinyServer(function(input, output, session) {
     
   })
   
+  observeEvent(input$resetGraphButton, {
+    
+    react_graph$g <- react_graph$g_original
+    
+    react_graph$g_reduced <- react_graph$g_original
+    
+  })
+  
   
   observeEvent(input$file, {
     
@@ -97,6 +107,8 @@ shinyServer(function(input, output, session) {
     else {
       react_graph$g <- loadGraph(in_file$datapath)
       react_graph$g_reduced <- react_graph$g
+      react_graph$g_original <- react_graph$g 
+      
     }
     
       

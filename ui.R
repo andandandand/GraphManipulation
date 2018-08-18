@@ -29,7 +29,10 @@ shinyUI(fluidPage(
                    value = 5),
       
       actionButton(inputId="updateGraphButton", 
-                   label="Update original graph")
+                   label="Update original graph"),
+      
+      actionButton(inputId="resetGraphButton", 
+                   label="Reset graph (no deletions)")
        
        
     ),
