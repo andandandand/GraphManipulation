@@ -21,12 +21,12 @@ shinyUI(fluidPage(
                    choices =c("vertices", "edges"),
                    selected = "vertices"),
 
-       #TODO: update max value dynamically 
+       #these values are ignored and get updated in the server
        sliderInput("numberOfElementsToDelete",
                    "Number of elements to delete",
                    min = 1,
-                   max = 50,
-                   value = 30),
+                   max = 5,
+                   value = 5),
       
       actionButton(inputId="updateGraphButton", 
                    label="Update original graph")

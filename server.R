@@ -29,9 +29,9 @@ loadGraph <- function(dataPath) {
 
 shinyServer(function(input, output, session) {
    
-  g <- make_star(10, mode = "undirected")
+  nVertices <- 10
+  g <- make_star(nVertices, mode = "undirected") %>% set_vertex_attr("name", value = 1:nVertices)
   
-  #todo: change
   g_reduced <- g
   
   react_graph <- reactiveValues(g = g, g_reduced = g_reduced)
@@ -65,15 +65,15 @@ shinyServer(function(input, output, session) {
     if(input$elementsToDelete == "vertices"){
      
     
-    #  print(1:input$numberOfElementsToDelete)
-    #  delete_vertices(react_graph$g, 1:input$numberOfElementsToDelete)
+    # why is this failing? 
+    react_graph$g_reduced <- delete_vertices(react_graph$g, 1:input$numberOfElementsToDelete)
+    print(input$numberOfElementsToDelete)
+    print(typeof(input$numberOfElementsToDelete))
       
     }
     
     if(input$elementsToDelete == "edges"){
       
-    #print("delete edges")
-
      react_graph$g_reduced <- delete_edges(react_graph$g, as_edgelist(g)[1:(input$numberOfElementsToDelete-1), ])      
 
     }
@@ -125,9 +125,10 @@ shinyServer(function(input, output, session) {
     
     coords <- layout_(react_graph$g, as_star())
     
-    plot(react_graph$g, layout=coords, edge.width = 2, edge.color = "Firebrick1",
+    plot(react_graph$g, layout=coords, edge.width = 2, 
+         edge.color = "Firebrick1",
          vertex.color = "Lightblue2", vertex.size = 25, 
-         vertex.label.family = "Arial Black" )
+         vertex.label.family = "Arial" )
       
   })
   
@@ -139,7 +140,7 @@ shinyServer(function(input, output, session) {
     plot(react_graph$g_reduced, layout=coords, edge.width = 2,
          edge.color = "Firebrick1",
          vertex.color = "Lightblue2", vertex.size = 25, 
-         vertex.label.family = "Arial Black" )
+         vertex.label.family = "Arial" )
     
   })
   
